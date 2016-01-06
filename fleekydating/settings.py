@@ -6,7 +6,7 @@ SECRET_KEY = 'u9ztscg$3a&$uw!l45n9c_(e5t4b+e*t9i)9dir69=2r6)sydf'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'ronanhiggins8@gmail.com'
@@ -29,6 +29,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'accounts',
     'django_forms_bootstrap',
+    'django_mobile',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -40,9 +41,16 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django_mobile.middleware.MobileDetectionMiddleware',
+    'django_mobile.middleware.SetFlavourMiddleware',
+
 )
 
 ROOT_URLCONF = 'fleekydating.urls'
+
+TEMPLATE_LOADERS = (
+    'django_mobile.loader.Loader',
+)
 
 TEMPLATES = [
     {
@@ -52,6 +60,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django_mobile.context_processors.flavour',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -66,12 +75,8 @@ WSGI_APPLICATION = 'fleekydating.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'fleekydb',
-        'USER': 'ronan',
-        'PASSWORD': 'apple',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -88,7 +93,6 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = ( os.path.join(BASE_DIR, "static"),)
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
