@@ -6,7 +6,7 @@ SECRET_KEY = 'u9ztscg$3a&$uw!l45n9c_(e5t4b+e*t9i)9dir69=2r6)sydf'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'ronanhiggins8@gmail.com'
@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'fleekydating.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'fleekydb',
+        'USER': 'ronan',
+        'PASSWORD': 'apple',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -93,6 +97,7 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = ( os.path.join(BASE_DIR, "static"),)
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
