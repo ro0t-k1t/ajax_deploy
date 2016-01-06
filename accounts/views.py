@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from models import Crush, Status, Likers, Wink
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django_mobile import set_flavour
 from django.contrib.sessions.models import Session
 from django.utils import timezone
 from django.db.models import Q
@@ -17,6 +19,9 @@ User = get_user_model()
 ###########################################################
 
 #Authentication#
+
+set_flavour('mobile')
+render_to_string('mobile.html')
 
 
 def register(request, register_form=UserRegistrationForm):
