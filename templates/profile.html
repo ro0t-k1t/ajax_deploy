@@ -90,6 +90,21 @@
             });
 
         }
+        
+        javascriptfunction2 = function(element){
+
+            var catid;
+            catid = $(element).attr("data-catid");
+
+
+            $.get('/like/', {category_id: catid, button_type: element.name}, function (data) {
+
+                    $("#panel" + element.id).fadeOut()
+
+
+            });
+
+        }
 
 
     });
@@ -264,11 +279,11 @@
                 {% if isprofilefriend or not switch  %}
                 {%  for post in posts %}
                     {% if not switch %}
-                    <div class="statuspanel">
+                    <div class="statuspanel" id="panel{{ post.id }}">
                     {% endif %}
 
                     {% if switch %}
-                    <div class="statuspanel" style="margin-top: 0; margin-bottom: 25px;">
+                    <div class="statuspanel" style="margin-top: 0; margin-bottom: 25px;" id="panel{{ post.id }}">
                     {% endif %}
 
 
