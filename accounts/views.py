@@ -25,6 +25,10 @@ render_to_string('mobile.html')
 
 
 def register(request, register_form=UserRegistrationForm):
+    
+    if request.flavour == 'mobile':
+
+        return render(request, 'mobile.html')
 
 
     if request.user.is_authenticated():
